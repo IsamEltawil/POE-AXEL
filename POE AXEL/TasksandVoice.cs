@@ -6,7 +6,9 @@ namespace POE_AXEL
     {
         static void Main()
         {
-            Console.WriteLine("Welcome to the Cybersecurity Chatbot!");
+            Console.Write("Enter your name: ");
+            string name = Console.ReadLine();
+            Console.WriteLine($"Welcome, {name}! Let's talk about cybersecurity.");
         }
     }
 }
