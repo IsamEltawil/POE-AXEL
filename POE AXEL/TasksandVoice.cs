@@ -7,7 +7,7 @@ namespace POE_AXEL
         static void Main()
         {
             string[] passwordQuestions = { "How can I create a strong password?", "How often should I change my password?" };
-            string[] phishingQuestions = { "What is phishing?", "How do I recognize a phishing email?" };
+            string[] passwordAnswers = { "Use at least 12 characters with a mix of letters, numbers, and symbols.", "Change your password every few months." };
 
             Console.Write("Enter your name: ");
             string name = Console.ReadLine();
@@ -15,7 +15,6 @@ namespace POE_AXEL
 
             Console.WriteLine("\nChoose a topic:");
             Console.WriteLine("1. Password Safety");
-            Console.WriteLine("2. Phishing");
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -26,7 +25,7 @@ namespace POE_AXEL
                     Console.WriteLine($"{i + 1}. {passwordQuestions[i]}");
 
                 int qChoice = Convert.ToInt32(Console.ReadLine()) - 1;
-                Console.WriteLine($"Answer: [Placeholder]");
+                Console.WriteLine($"Answer: {passwordAnswers[qChoice]}");
             }
         }
     }
