@@ -6,27 +6,23 @@ namespace POE_AXEL
     {
         static void Main()
         {
-            string[] passwordQuestions = { "How can I create a strong password?", "How often should I change my password?" };
-            string[] passwordAnswers = { "Use at least 12 characters with a mix of letters, numbers, and symbols.", "Change your password every few months." };
-
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter your name: ");
+            Console.ResetColor();
             string name = Console.ReadLine();
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine($"Welcome, {name}! Let's talk about cybersecurity.");
+            Console.ResetColor();
 
             Console.WriteLine("\nChoose a topic:");
             Console.WriteLine("1. Password Safety");
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice != 1)
+                Console.WriteLine("Invalid choice. Try again.");
 
-            int choice = Convert.ToInt32(Console.ReadLine());
-
-            if (choice == 1)
-            {
-                Console.WriteLine("Choose a question:");
-                for (int i = 0; i < passwordQuestions.Length; i++)
-                    Console.WriteLine($"{i + 1}. {passwordQuestions[i]}");
-
-                int qChoice = Convert.ToInt32(Console.ReadLine()) - 1;
-                Console.WriteLine($"Answer: {passwordAnswers[qChoice]}");
-            }
+            Console.WriteLine("Choose a question:");
+            Console.WriteLine("1. How can I create a strong password?");
         }
     }
 }
