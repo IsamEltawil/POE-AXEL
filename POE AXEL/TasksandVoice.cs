@@ -78,6 +78,7 @@ namespace POE_AXEL
 
         static void TypeText(string text, int speed = 30)
         {
+
             Console.ForegroundColor = ConsoleColor.Magenta;
             foreach (char c in text)
             {
@@ -100,6 +101,10 @@ namespace POE_AXEL
 
         public static void user()
         {
+
+            char t = (char)45;
+            char j = (char)124;
+
             Logo.logo();
 
             axel.Play();
@@ -123,7 +128,65 @@ namespace POE_AXEL
 
                 if (option == 1)
                 {
-                    TypeText("Here are the Options for the Password safety questions: \n");
+                    
+
+
+                    
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    //2 horizontal frame lines
+                    for (int n = 0; n < 100; n++)
+                    {
+                        Console.Write(t);
+                        if (n == 49)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write("\n");
+                        }
+
+                    }
+
+                    //skip lines between loops
+
+
+
+
+                    Console.Write("\n");
+
+                    //vertical border for frame
+                    for (int y = 0; y < 2; y++)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine(j + "                                                " + j);
+
+                        if (y == 1)
+                        {
+
+                            Console.Write(j + "   Passwords             " + j);
+                        }
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+
+
+                    Console.WriteLine();
+
+                    //2 horizontal frame lines
+                    for (int l = 0; l <= 100; l++)
+                    {
+                        Console.Write(t);
+                        if (l == 49)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine(t);
+                        }
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+                   
+
+
+                    Console.ResetColor();
+                    TypeText("\n\n\nHere are the Options for the Password safety questions: \n");
+
                     for (int i = 0; i < Password.Length; i++)
                     {
                         TypeText(Password[i]);
@@ -136,7 +199,61 @@ namespace POE_AXEL
 
                 if (option == 2)
                 {
-                    TypeText("Here are the Options for the Phishing questions: \n");
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    //2 horizontal frame lines
+                    for (int n = 0; n < 100; n++)
+                    {
+                        Console.Write(t);
+                        if (n == 49)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write("\n");
+                        }
+
+                    }
+
+                    //skip lines between loops
+
+
+
+
+                    Console.Write("\n");
+
+                    //vertical border for frame
+                    for (int y = 0; y < 2; y++)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine(j + "                                                " + j);
+
+                        if (y == 1)
+                        {
+
+                            Console.Write(j + "   Phishing       " + j);
+                        }
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+
+
+                    Console.WriteLine();
+
+                    //2 horizontal frame lines
+                    for (int l = 0; l <= 100; l++)
+                    {
+                        Console.Write(t);
+                        if (l == 49)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine(t);
+                        }
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+
+
+
+                    Console.ResetColor();
+                    TypeText("\n\n\nHere are the Options for the Phishing questions: \n");
                     for (int i = 0; i < Phishing.Length; i++)
                     {
                         TypeText(Phishing[i]);
@@ -149,7 +266,60 @@ namespace POE_AXEL
 
                 if (option == 3)
                 {
-                    TypeText("Here are the Options for the Safe Browsing questions: \n");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    //2 horizontal frame lines
+                    for (int n = 0; n < 100; n++)
+                    {
+                        Console.Write(t);
+                        if (n == 49)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write("\n");
+                        }
+
+                    }
+
+                    //skip lines between loops
+
+
+
+
+                    Console.Write("\n");
+
+                    //vertical border for frame
+                    for (int y = 0; y < 2; y++)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine(j + "                                                " + j);
+
+                        if (y == 1)
+                        {
+
+                            Console.Write(j + "   Safe Browing      " + j);
+                        }
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+
+
+                    Console.WriteLine();
+
+                    //2 horizontal frame lines
+                    for (int l = 0; l <= 100; l++)
+                    {
+                        Console.Write(t);
+                        if (l == 49)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine(t);
+                        }
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+
+
+
+                    Console.ResetColor();
+                    TypeText("\n\n\nHere are the Options for the Safe Browsing questions: \n");
                     for (int i = 0; i < SafeBrowsing.Length; i++)
                     {
                         TypeText(SafeBrowsing[i]);
