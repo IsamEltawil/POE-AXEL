@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 
 namespace POE_AXEL
 {
@@ -6,23 +7,17 @@ namespace POE_AXEL
     {
         static void Main()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            SoundPlayer axel = new SoundPlayer("AXEL.wav");
+            axel.Play();
+
+            Console.WriteLine("\nPress any key to continue or 'E' to exit.");
+            string response = Console.ReadLine().ToLower();
+            if (response == "e")
+                return;
+
             Console.Write("Enter your name: ");
-            Console.ResetColor();
             string name = Console.ReadLine();
-
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine($"Welcome, {name}! Let's talk about cybersecurity.");
-            Console.ResetColor();
-
-            Console.WriteLine("\nChoose a topic:");
-            Console.WriteLine("1. Password Safety");
-            int choice;
-            while (!int.TryParse(Console.ReadLine(), out choice) || choice != 1)
-                Console.WriteLine("Invalid choice. Try again.");
-
-            Console.WriteLine("Choose a question:");
-            Console.WriteLine("1. How can I create a strong password?");
+            Console.WriteLine($"Welcome, {name}!");
         }
     }
 }
