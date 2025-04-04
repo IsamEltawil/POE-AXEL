@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Media;
 using System.Threading;
+using System.Transactions;
 
 namespace POE_AXEL
 {
@@ -65,12 +66,14 @@ namespace POE_AXEL
         static string rl()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            string input;
+            string input; 
             while (true)
             {
                 input = Console.ReadLine()?.Trim().ToLower();
                 if (!string.IsNullOrEmpty(input)) break;
-                Console.Write("Input cannot be empty. Please try again: ");
+                Console.Write("Input cannot be empty. Please try again: "); 
+
+                
             }
             Console.ResetColor();
             return input;
@@ -93,7 +96,7 @@ namespace POE_AXEL
         {
             if (index < 0 || index >= array.Length)
             {
-                TypeText("Invalid choice. Please pick a valid number.");
+                TypeText("Invalid choice. Please pick a valid number next time.");
                 return null;
             }
             return array[index];
@@ -120,12 +123,81 @@ namespace POE_AXEL
             name = rl();
 
             TypeText($"\nWelcome {name}! Let's get started.");
+            inConversation = true;
+
+            while (inConversation)
+            {
+                TypeText("\nDo you have any personal questions before we begin? (yes/no)");
+                personal = rl();
+
+                if (personal == "yes")
+                {
+                    TypeText("\nOkay, what's on your mind? ");
+                    question = rl();
+
+                    if (question.Contains("whats your purpose") || question.Contains("what is your purpose"))
+                    {
+                        TypeText("\nI'm your cybersecurity assistant. I help you stay safe online.");
+                        TypeText("\nIf you'd like to ask something else, press 'B'. Otherwise, type anything to continue.");
+                        if (rl() != "b") inConversation = false;
+                    }
+                    else if (question.Contains("how are you"))
+                    {
+                        TypeText("\nI'm doing great! Thanks for asking.");
+                        TypeText("\nIf you have another personal question, press 'B'. Otherwise, type anything to continue.");
+                        if (rl() != "b") inConversation = false;
+                    }
+                    else if (question.Contains("what can i ask you about"))
+                    {
+                        TypeText("\nYou can ask about Password Safety, Phishing, and Safe Browsing.");
+                        TypeText("\nWould you like to continue with those topics? (yes/no)");
+                        exit3 = rl();
+
+                        if (exit3 == "yes")
+                        {
+                            TypeText("\nGreat! Let's go.");
+                            inConversation = false;
+                        }
+                        else if (exit3 == "no")
+                        {
+                            TypeText("Do you want to exit the application? (yes/no)");
+                            if (rl() == "yes") Environment.Exit(0);
+                            TypeText("Okay, let's continue.");
+                        }
+                    }
+                    else
+                    {
+                        TypeText("\nNot sure how to respond to that, but let's continue! Let's get down to the security part");
+                        inConversation = false;
+                    }
+                }
+                else if (personal == "no")
+                {
+                    TypeText("\nAlright! Let's go!");
+                    inConversation = false;
+                }
+                else
+                {
+                    TypeText("Didn't quite get that. Please answer with 'yes' or 'no'.");
+                }
+            }
 
             while (true)
             {
-                TypeText("\n\nWhat are you interested in 1.Password safety, 2. Phishing and 3. Safe browsing");
-                option = Convert.ToInt32(rl());
 
+                while (inConversation)
+                    inConversation = false;
+                try
+                {
+                    TypeText("\n\nWhat are you interested in 1.Password safety, 2. Phishing and 3. Safe browsing");
+                    option = Convert.ToInt32(rl());
+                }
+
+                catch(System.FormatException e)
+                {
+                    TypeText("Invalid input, please try again");
+                    inConversation = true;
+                }
                 if (option == 1)
                 {
                     
@@ -185,16 +257,21 @@ namespace POE_AXEL
 
 
                     Console.ResetColor();
-                    TypeText("\n\n\nHere are the Options for the Password safety questions: \n");
 
-                    for (int i = 0; i < Password.Length; i++)
-                    {
-                        TypeText(Password[i]);
-                    }
-                    TypeText("\n\nPick a number and I'll answer You\t");
-                    option = Convert.ToInt32(rl()) - 1;
-                    string answer = GetSafeArrayValue(PasswordAnswers, option);
-                    if (answer != null) TypeText(answer);
+                    inConversation = true;
+                    
+                        TypeText("\n\n\nHere are the Options for the Password safety questions: \n");
+
+                        for (int i = 0; i < Password.Length; i++)
+                        {
+                            TypeText(Password[i]);
+                        }
+                        TypeText("\n\nPick a number and I'll answer You\t");
+                        option = Convert.ToInt32(rl()) - 1;
+                        string answer = GetSafeArrayValue(PasswordAnswers, option);
+
+                        if (answer != null) TypeText(answer);
+                    
                 }
 
                 if (option == 2)
