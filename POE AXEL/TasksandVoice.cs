@@ -2,11 +2,15 @@
 using System.Media;
 using System.Threading;
 using System.Transactions;
+using System.Collections;
 
 namespace POE_AXEL
 {
+
     class TasksandVoice
     {
+        public delegate void Dell();
+
         static SoundPlayer axel = new SoundPlayer("AXEL.wav");
         static string name;
         static bool inConversation;
@@ -63,17 +67,52 @@ namespace POE_AXEL
             "Use browser security settings, antivirus software, or browser extensions like uBlock Origin."
         };
 
+        static string[] passwordTips =
+{
+    "Use a unique password for each account.",
+    "Include uppercase, lowercase, numbers, and symbols.",
+    "Avoid using personal information like birthdays.",
+    "Change your passwords regularly.",
+    "Use a password manager to store passwords securely.",
+    "Enable two-factor authentication (2FA) where possible.",
+    "Never share your passwords with anyone."
+};
+
+        static string[] scamTips =
+         {
+    "Never click on suspicious links in emails or messages.",
+    "Verify the identity of unknown callers before sharing info.",
+    "Be cautious of deals that seem too good to be true.",
+    "Don’t provide personal or financial info via unsecured websites.",
+    "Look for spelling errors and odd sender emails in messages.",
+    "Avoid urgent threats or pressure tactics – scammers use fear.",
+    "Report suspected scams to the proper authorities."
+        };
+
+        static string[] privacyTips =
+         {
+    "Review and adjust your privacy settings on social media.",
+    "Don’t overshare personal information online.",
+    "Use encrypted messaging apps for private conversations.",
+    "Turn off location sharing when not needed.",
+    "Regularly update your software to fix security holes.",
+    "Use a VPN on public Wi-Fi networks.",
+    "Be mindful of apps requesting unnecessary permissions."
+        };
+
+
+
         static string rl()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            string input; 
+            string input;
             while (true)
             {
                 input = Console.ReadLine()?.Trim().ToLower();
                 if (!string.IsNullOrEmpty(input)) break;
-                Console.Write("Input cannot be empty. Please try again: "); 
+                Console.Write("Input cannot be empty. Please try again: ");
 
-                
+
             }
             Console.ResetColor();
             return input;
@@ -102,11 +141,49 @@ namespace POE_AXEL
             return array[index];
         }
 
+        public void Worried()
+        {
+            TypeText("You dont have to worry about anything, we got you covered");
+        }
+
+        public void Curious()
+        {
+            TypeText("That's what we're here for, to help settle your curiousity, let's continue shall we");
+        }
+
+        public void Frustrate()
+        {
+            TypeText("As Humans we all get Frustrated, but that frustration means you care, and thus you should keep pushing....let's continue");
+        }
+
+        /*The Actual coding starts here
+        .
+        .
+        .
+        .
+        .
+        .
+        .
+        .
+        .*/
+
+
         public static void user()
         {
+            String usertip;
+            Random rnd = new Random();
+
+
+
+
+
+
 
             char t = (char)45;
             char j = (char)124;
+
+
+
 
             Logo.logo();
 
@@ -182,7 +259,9 @@ namespace POE_AXEL
                 }
             }
 
-            while (true)
+            inConversation = true;
+
+            while (inConversation)
             {
 
                 while (inConversation)
@@ -193,17 +272,17 @@ namespace POE_AXEL
                     option = Convert.ToInt32(rl());
                 }
 
-                catch(System.FormatException e)
+                catch (System.FormatException e)
                 {
                     TypeText("Invalid input, please try again");
                     inConversation = true;
                 }
                 if (option == 1)
                 {
-                    
 
 
-                    
+
+
                     Console.ForegroundColor = ConsoleColor.Blue;
                     //2 horizontal frame lines
                     for (int n = 0; n < 100; n++)
@@ -253,25 +332,25 @@ namespace POE_AXEL
                         }
                     }
                     Console.ForegroundColor = ConsoleColor.White;
-                   
+
 
 
                     Console.ResetColor();
 
                     inConversation = true;
-                    
-                        TypeText("\n\n\nHere are the Options for the Password safety questions: \n");
 
-                        for (int i = 0; i < Password.Length; i++)
-                        {
-                            TypeText(Password[i]);
-                        }
-                        TypeText("\n\nPick a number and I'll answer You\t");
-                        option = Convert.ToInt32(rl()) - 1;
-                        string answer = GetSafeArrayValue(PasswordAnswers, option);
+                    TypeText("\n\n\nHere are the Options for the Password safety questions: \n");
 
-                        if (answer != null) TypeText(answer);
-                    
+                    for (int i = 0; i < Password.Length; i++)
+                    {
+                        TypeText(Password[i]);
+                    }
+                    TypeText("\n\nPick a number and I'll answer You\t");
+                    option = Convert.ToInt32(rl()) - 1;
+                    string answer = GetSafeArrayValue(PasswordAnswers, option);
+
+                    if (answer != null) TypeText(answer);
+
                 }
 
                 if (option == 2)
@@ -408,8 +487,164 @@ namespace POE_AXEL
                     //makes sure the answer fits in the array so if the user entered a number that isnt part of the array it allows the user to try again
                     string answer = GetSafeArrayValue(SafeBrowsingAnswers, option);
                     if (answer != null) TypeText(answer);
+
+
+
+                }
+
+                TypeText("\n1.Do you want to continue or 2.ask another question");
+                int cc = Convert.ToInt32(rl());
+
+                if(cc == 1 )
+                {
+                    TypeText("Cool,let's continue\n");
+                    break;
+                }
+                else if (cc == 2)
+                {
+                    TypeText("Okay, reversing......");
+                    inConversation = true;
+                }
+                else
+                {
+                    TypeText("I'll Assume you want us to move forward\n");
+                    break;
                 }
             }
+            
+            ArrayList list = new ArrayList();
+
+            bool continueTopic = true;
+            while (continueTopic)
+            {
+               
+
+                TypeText($"\n{name}, is there anything else you'd like to know about this topic, need a tip (Password, Scam, Privacy), or want to express how you're feeling?\n");
+                usertip = rl();
+                String[] f = usertip.ToLower().Split(' ');   
+
+                if (usertip.Contains("password") || usertip.Contains("scam") || usertip.Contains("privacy"))
+                {
+                   
+
+                    int rndnum = rnd.Next(0, 7);
+
+                    if (usertip.Contains("password"))
+                    {
+                        if(list.Contains("password"))
+                        {
+
+                            TypeText("\nYou already asked for a password related tip, want to continue? 1. Yes  2. No ");
+                            String con = rl().ToLower().Trim();
+                            if (con.Contains("yes"))
+                            {
+                                TypeText("\nOkay let's continue with your password related tip");   
+                            }
+                            else if(con.Contains("no"))
+                            {
+                                TypeText("\nokay lets see what you want.....");
+                            }
+                        }
+                        list.Add("password");
+                        TypeText($"\nHere's a password tip for you, {name}:");
+                        TypeText(passwordTips[rndnum]);
+                    }
+
+                    if (usertip.Contains("scam"))
+                    {
+                        if (list.Contains("scam"))
+                        {
+
+                            TypeText("\nYou already asked for a scam related tip, want to continue? 1. Yes  2. No ");
+                            String con = rl().ToLower().Trim();
+                            if (con.Contains("yes") || con.Contains("1"))
+                            {
+                                TypeText("\nOkay let's continue with your scam related tip");
+                            }
+                            else if (con.Contains("no") || con.Contains("2"))
+                            {
+                                TypeText("\nokay lets see what you want.....");
+                            }
+                        }
+
+                        list.Add("scam");
+                        TypeText($"\nAlright {name}, here's a scam tip to help you stay sharp:");
+                        TypeText(scamTips[rndnum]);
+                    }
+
+                    if (usertip.Contains("privacy"))
+                    {
+                        if (list.Contains("privacy"))
+                        {
+
+                            TypeText("\nYou already asked for a privacy related tip, want to continue? 1. Yes  2. No ");
+                            String con = rl().ToLower().Trim();
+                            if (con.Contains("yes") || con.Contains("1"))
+                            {
+                                TypeText("\nOkay let's continue with your privacy related tip");
+                            }
+                            else if (con.Contains("no") || con.Contains("2"))
+                            {
+                                TypeText("\nokay lets see what you want.....");
+                            }
+                        }
+                        list.Add("privacy");
+                        TypeText($"\nProtecting your privacy is crucial, {name}. Here's a tip:");
+                        TypeText(privacyTips[rndnum]);
+                    }
+                }
+
+                Dell d = null;
+                TasksandVoice tv = new TasksandVoice(); // create instance to access non-static methods
+
+                foreach (string ff in f)
+                {
+                    if (ff.Contains("worr"))
+                    {
+                        TypeText($"\nIt's okay to feel worried sometimes, {name}.");
+                        d = new Dell(tv.Worried);
+                        break;
+                    }
+                    else if (ff.Contains("curious"))
+                    {
+                        TypeText($"\nI love that you're curious, {name}!");
+                        d = new Dell(tv.Curious);
+                        break;
+                    }
+                    else if (ff.Contains("frustrat"))
+                    {
+                        TypeText($"\nI'm here for you, {name}. Let's work through this.");
+                        d = new Dell(tv.Frustrate);
+                        break;
+                    }
+                }
+
+                d?.Invoke();
+
+                TypeText($"\nWould you like to ask something else about this topic or exit, {name}? (ask/switch/exit)");
+                string followUp = rl();
+
+                if (followUp == "ask")
+                {
+                    continue; // Stay in the same loop/topic
+                }
+               
+                else if (followUp == "exit")
+                {
+                    TypeText($"\nAlright, {name}. Stay safe out there!");
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    TypeText($"\nGot it, {name}. We’ll keep going with this topic.");
+                }
+            }
+
+            
+
+
+
         }
+
     }
 }
