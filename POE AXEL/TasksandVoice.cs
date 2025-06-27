@@ -8,8 +8,8 @@ namespace POE_AXEL
 {
 
     class TasksandVoice
-    { 
-        
+    {
+        public delegate void Dell();
 
         static SoundPlayer axel = new SoundPlayer("AXEL.wav");
         static string name;
@@ -141,7 +141,6 @@ namespace POE_AXEL
             return array[index];
         }
 
-        public delegate void Dell();
         public void Worried()
         {
             TypeText("You dont have to worry about anything, we got you covered");
@@ -515,7 +514,6 @@ namespace POE_AXEL
             
             ArrayList list = new ArrayList();
 
-
             bool continueTopic = true;
             while (continueTopic)
             {
@@ -538,11 +536,11 @@ namespace POE_AXEL
 
                             TypeText("\nYou already asked for a password related tip, want to continue? 1. Yes  2. No ");
                             String con = rl().ToLower().Trim();
-                            if (con.Contains("yes") || con.Contains("1"))
+                            if (con.Contains("yes"))
                             {
                                 TypeText("\nOkay let's continue with your password related tip");   
                             }
-                            else if(con.Contains("no") || con.Contains("2"))
+                            else if(con.Contains("no"))
                             {
                                 TypeText("\nokay lets see what you want.....");
                             }
@@ -588,7 +586,6 @@ namespace POE_AXEL
                             else if (con.Contains("no") || con.Contains("2"))
                             {
                                 TypeText("\nokay lets see what you want.....");
-                                
                             }
                         }
                         list.Add("privacy");
@@ -624,7 +621,7 @@ namespace POE_AXEL
 
                 d?.Invoke();
 
-                TypeText($"\nWould you like to ask something else about this topic or exit, {name}? (ask/exit)");
+                TypeText($"\nWould you like to ask something else about this topic or exit, {name}? (ask/switch/exit)");
                 string followUp = rl();
 
                 if (followUp == "ask")
